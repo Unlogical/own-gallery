@@ -6,8 +6,6 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 
-def homepage(request):
-    return render(request, 'gallery/base.html')
 
 class SignUp(generic.CreateView):
     form_class = UserCreationForm
