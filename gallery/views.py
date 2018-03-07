@@ -23,7 +23,7 @@ def post_image(request):
         form = ImageForm(request.POST)
         if form.is_valid():
             image = form.save(commit=False)
-            image.author = request.user
+            image.user = request.user
             image.save()
             # process the data in form.cleaned_data as required
             # ...
