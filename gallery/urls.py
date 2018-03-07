@@ -4,6 +4,9 @@ from django.views.generic.base import TemplateView
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html')),
-    path('homepage/', TemplateView.as_view(template_name='home.html'), name='home'),
+
+#   path('home/', views.post_image(name='home.html')),
+    path('home/', views.post_image, name='post_image'),
+
     path('signup/', views.SignUp.as_view(), name='signup'),
 ]
