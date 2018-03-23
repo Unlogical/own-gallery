@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 from django.urls import reverse_lazy
 from django.views import generic
-
+from .models import Image
 
 
 class SignUp(generic.CreateView):
@@ -19,19 +19,15 @@ from .forms import ImageForm
 
 @login_required
 def post_image(request):
+    user = request.user
+    images = Image.objects.filter(user = user)
     if request.method == 'POST':
         form = ImageForm(request.POST)
         if form.is_valid():
             image = form.save(commit=False)
-            image.user = request.user
+            image.user = user
             image.save()
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            #return HttpResponseRedirect('/home/')
-
-    # if a GET (or any other method) we'll create a blank form
     else:
         form = ImageForm()
 
-    return render(request, 'home.html', {'form': form})
+    return render(request, 'home.html', {'images':images, 'form':form},)

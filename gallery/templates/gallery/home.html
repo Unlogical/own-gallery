@@ -6,6 +6,9 @@
 {% if user.is_authenticated %}
     Hi {{ user.username }}!
     <p><a href="{% url 'logout' %}">logout</a></p>
+    {% for image in images %}
+        <img src="{{image.src}}" class="image" width="200px" height="200px">
+    {% endfor %}
     <form method="POST" name="imageform" class="postimage">
         {% csrf_token %}
         {{ form.as_p }}
