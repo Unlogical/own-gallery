@@ -3,6 +3,9 @@
 {% block title %}login{% endblock %}
 
 {% block content %}
+<header>Create your own image gallery</header>
+<a href="{% url 'signup' %}" class="button signup-button">Sign up</a>
+<a href="{% url 'login' %}" class="button signup-button">Log in</a>
 <h2>Login</h2>
 <form method="post">
     {% csrf_token %}

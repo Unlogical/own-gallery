@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.template import RequestContext
 from django.contrib.auth.forms import UserCreationForm
 
@@ -31,3 +31,9 @@ def post_image(request):
         form = ImageForm()
 
     return render(request, 'home.html', {'images':images, 'form':form},)
+
+@login_required
+def delete_image(request, pk):
+    image = get_object_or_404(Image, pk=pk)
+    image.delete()
+    return redirect('post_image')
